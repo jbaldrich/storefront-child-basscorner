@@ -1,4 +1,6 @@
 <?php
+// Exit if accessed directly
+if ( !defined( 'ABSPATH' ) ) exit;
 
 /**
  * Storefront automatically loads the core CSS even if using a child theme as it is more efficient
@@ -9,19 +11,31 @@
  * If you don't plan to dequeue the Storefront Core CSS you can remove the subsequent line and as well
  * as the sf_child_theme_dequeue_style() function declaration.
  */
-//add_action( 'wp_enqueue_scripts', 'sf_child_theme_dequeue_style', 999 );
+
 
 /**
  * Dequeue the Storefront Parent theme core CSS
  */
-function sf_child_theme_dequeue_style() {
+function jbr_child_theme_dequeue_style() {
     wp_dequeue_style( 'storefront-style' );
     wp_dequeue_style( 'storefront-woocommerce-style' );
 }
+//add_action( 'wp_enqueue_scripts', 'jbr_child_theme_dequeue_style', 999 );
 
 /**
- * Note: DO NOT! alter or remove the code above this text and only add your custom PHP functions below this text.
+ * Enqueue Fonts
  */
+function jbr_enqueue_fonts() {
+	$fonts = array(
+		'Catamaran' => 'https://fonts.googleapis.com/css?family=Catamaran:700,900',
+	);
+	foreach ($fonts as $font => $src) {
+		wp_register_style( $font, $src, array(), null );
+		wp_enqueue_style( $font, $src, array(), null );
+	}
+	
+}
+add_action( 'wp_enqueue_scripts', 'jbr_enqueue_fonts' );
 
 /**
  * Place product search bar before secondary navigation
