@@ -35,9 +35,18 @@ Text Domain:  	storefront
   width: 20%;
 }
 #masthead .site-search {
+  margin: 0;
   width: 35%;
 }
-#masthead .site-search input[type=search] {
+#masthead .site-search .widget_product_search {
+  padding: 0.7em 0;
+}
+#masthead .site-search .widget_product_search form:before {
+  font-size: 1.8em;
+  top: 0.5em;
+  left: 0.5em;
+}
+#masthead .site-search .widget_product_search input[type=search] {
   border-width: 1px;
   border-color: #9B9B9B;
   border-style: solid;
@@ -46,6 +55,8 @@ Text Domain:  	storefront
   border-radius: 28px;
   box-sizing: border-box;
   background: none;
+  font-size: 1.2em;
+  padding: 0.7em 0 0.7em 3.5em;
 }
 #masthead .primary-navigation {
   font-family: Catamaran, HelveticaNeue-Light, "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;

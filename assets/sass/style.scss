@@ -24,6 +24,8 @@ $secondary-color: #333;
 	border-radius: $radius;
 }
 
+
+
 /* HEADER */
 
 #masthead {
@@ -52,16 +54,31 @@ $secondary-color: #333;
 	}
 
 	.site-search {
+		margin: 0;
 		width: 35%;
 
-		input[type=search]{
-			border-width: 1px;
-			border-color: #9B9B9B;
-			border-style: solid;
-			@include border-radius(28px);
-			box-sizing: border-box;
-			background: none;
+		.widget_product_search {
+			padding: 0.7em 0;
+
+			form:before {
+				font-size: 1.8em;
+				top: 0.5em;
+				left: 0.5em;
+			}
+
+			input[type=search] {
+				border-width: 1px;
+				border-color: #9B9B9B;
+				border-style: solid;
+				@include border-radius(28px);
+				box-sizing: border-box;
+				background: none;
+				font-size: 1.2em;
+				padding: 0.7em 0 0.7em 3.5em;
+			}
 		}
+
+		
 	}
 
 	.primary-navigation {
@@ -71,7 +88,7 @@ $secondary-color: #333;
 
 }
 
-@media (max-width: 768px){
+@media (max-width: 768px) {
 	#masthead .col-full {
 		display: block;
 	}
