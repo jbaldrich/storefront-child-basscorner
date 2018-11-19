@@ -10,60 +10,55 @@ License:      	GNU General Public License v2 or later
 License URI:  	http://www.gnu.org/licenses/gpl-2.0.html
 Text Domain:  	storefront
 */
-
-
+/* VARIABLES */
+/* MIXINS */
 /* HEADER */
-
 #masthead {
-	padding: 0;
+  padding: 0;
 }
-
 #masthead .col-full {
-	display: flex;
+  display: flex;
 }
-
-@media (max-width: 768px){
-	#masthead .col-full {
-		display: block;
-	}
-}
-
 #masthead .site-branding {
-	margin: 0;
-	width: 35%;
-	min-width: 250px;
+  margin: 0;
+  width: 35%;
+  min-width: 250px;
 }
-
 #masthead .site-branding a {
-	font-family: Catamaran,HelveticaNeue-Light,"Helvetica Neue Light","Helvetica Neue",Helvetica,Arial,"Lucida Grande",sans-serif;
-	font-weight: 900;
-	white-space: nowrap;
+  font-family: Catamaran, HelveticaNeue-Light, "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+  font-weight: 900;
+  text-transform: lowercase;
+  word-spacing: -0.2em;
+  white-space: nowrap;
 }
-
 #masthead .secondary-navigation {
-	width: 20%;
+  width: 20%;
 }
-
 #masthead .site-search {
-	width: 35%;
+  width: 35%;
 }
-
-#masthead .site-search input[type=search]{
-	border-width: 1px;
-	border-color: #9B9B9B;
-	border-style: solid;
-	border-radius: 28px 28px 28px 28px;
-	-moz-border-radius: 28px 28px 28px 28px;
-	-webkit-border-radius: 28px 28px 28px 28px;
-	box-sizing: border-box;
-	background: none;
+#masthead .site-search input[type=search] {
+  border-width: 1px;
+  border-color: #9B9B9B;
+  border-style: solid;
+  -moz-border-radius: 28px;
+  -webkit-border-radius: 28px;
+  border-radius: 28px;
+  box-sizing: border-box;
+  background: none;
 }
-
 #masthead .primary-navigation {
-	font-family: Catamaran,HelveticaNeue-Light,"Helvetica Neue Light","Helvetica Neue",Helvetica,Arial,"Lucida Grande",sans-serif;
-	font-weight: 700;
+  font-family: Catamaran, HelveticaNeue-Light, "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+  font-weight: 700;
 }
 
-.storefront-primary-navigation {
-	background-color: grey;
+@media (max-width: 768px) {
+  #masthead .col-full {
+    display: block;
+  }
 }
+.storefront-primary-navigation {
+  background-color: #333;
+}
+
+/*# sourceMappingURL=style.css.map */

@@ -1,25 +1,82 @@
 /*
-Theme Name:     Storefront Child Theme
-Theme URI:      https://github.com/stuartduff/storefront-child-theme
-Author:         Stuart Duff
-Author URI:     http://stuartduff.com
+Theme Name:   	Tanne Bass Corner Theme
+Theme URI:    	https://github.com/jbaldrich/storefront-child-basscorner
+Author:       	Jaco Baldrich
+Author URI:     https://jacobaldrich.com
 Template:     	storefront
-Description:  	This is a blank child theme for WooThemes StoreFront theme
+Description:  	This is a custom storefront child theme for Tanne Bass Corner
 Version:      	1.0.0
 License:      	GNU General Public License v2 or later
 License URI:  	http://www.gnu.org/licenses/gpl-2.0.html
 Text Domain:  	storefront
-Tags:         	black, white, light, two-columns, left-sidebar, right-sidebar, responsive-layout, custom-background, custom-colors, custom-header, custom-menu, featured-images, full-width-template, threaded-comments, accessibility-ready
-This theme, like WordPress, is licensed under the GPL.
-Use it to make something cool, have fun, and share what you've learned with others.
-Storefront is based on Underscores http://underscores.me/, (C) 2012-2014 Automattic, Inc.
-Resetting and rebuilding styles have been helped along thanks to the fine work of
-Eric Meyer http://meyerweb.com/eric/tools/css/reset/index.html
-along with Nicolas Gallagher and Jonathan Neal http://necolas.github.com/normalize.css/
-FontAwesome License: SIL Open Font License - http://scripts.sil.org/OFL
-Images License: GNU General Public License v2 or later
 */
 
-/*
- * Add your own custom css below this text.
- */
+/* VARIABLES */
+$primary-font: Catamaran,HelveticaNeue-Light,"Helvetica Neue Light","Helvetica Neue",Helvetica,Arial,"Lucida Grande",sans-serif;
+$primary-color: #333;
+$secondary-color: #333;
+
+
+/* MIXINS */
+@mixin border-radius($radius) {
+	-moz-border-radius: $radius;
+	-webkit-border-radius: $radius;
+	border-radius: $radius;
+}
+
+/* HEADER */
+
+#masthead {
+	padding: 0;
+
+	.col-full {
+		display: flex;
+	}
+
+	.site-branding {
+		margin: 0;
+		width: 35%;
+		min-width: 250px;
+
+		a {
+			font-family: $primary-font;
+			font-weight: 900;
+			text-transform: lowercase;
+			word-spacing: -0.2em;
+			white-space: nowrap;
+		}
+	}
+
+	.secondary-navigation {
+		width: 20%;
+	}
+
+	.site-search {
+		width: 35%;
+
+		input[type=search]{
+			border-width: 1px;
+			border-color: #9B9B9B;
+			border-style: solid;
+			@include border-radius(28px);
+			box-sizing: border-box;
+			background: none;
+		}
+	}
+
+	.primary-navigation {
+		font-family: $primary-font;
+		font-weight: 700;
+	}
+
+}
+
+@media (max-width: 768px){
+	#masthead .col-full {
+		display: block;
+	}
+}
+
+.storefront-primary-navigation {
+	background-color: $primary-color;
+}
