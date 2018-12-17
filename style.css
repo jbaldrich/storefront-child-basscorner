@@ -91,6 +91,9 @@ body, button, input, textarea, select {
     align-items: center;
     flex-wrap: nowrap;
   }
+  #masthead .secondary-navigation a {
+    padding: 1em 0.575em;
+  }
   #masthead .storefront-primary-navigation {
     background-color: #333;
   }
@@ -126,6 +129,16 @@ body, button, input, textarea, select {
     content: "";
     line-height: 0.2;
     font-size: 1.2em;
+  }
+}
+/* BREADCUMBS */
+.storefront-breadcrumb {
+  margin: 0;
+}
+
+@media (min-width: 768px) {
+  .storefront-breadcrumb {
+    margin: 0;
   }
 }
 

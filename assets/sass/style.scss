@@ -86,8 +86,6 @@ body,button,input,textarea,select {
 		}
 	}
 
-	
-
 	.primary-navigation {
 		font-family: $primary-font;
 		font-weight: 900;
@@ -115,7 +113,6 @@ body,button,input,textarea,select {
 			}
 		}
 
-
 		.secondary-navigation {
 			/*border: 1px solid red;*/
 			margin: 0;
@@ -125,6 +122,10 @@ body,button,input,textarea,select {
 			justify-content: flex-end;
 			align-items: center;
 			flex-wrap: nowrap;
+
+			a {
+				padding: 1em .575em;
+			}
 		}
 
 		.storefront-primary-navigation {
@@ -175,10 +176,18 @@ body,button,input,textarea,select {
 				}
 			}
 		}
-
-		
 	}
 }
 
+/* BREADCUMBS */
 
+.storefront-breadcrumb {
+	margin: 0;
+}
+
+@media (min-width: 768px) {
+	.storefront-breadcrumb {
+		margin: 0;
+	}
+}
 
