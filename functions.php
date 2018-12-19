@@ -127,7 +127,7 @@ function jbr_show_product_subcategories( $args = array() ) {
 		foreach ( $terms as $term ) {
 		echo '<li class="category">';
 			echo '<h2>';
-				echo '<a href="' .esc_url( get_term_link( $term ) ) . '" class="button ' . $term->slug . '">';
+				echo '<a href="' . esc_url( get_term_link( $term ) ) . '" class="button ' . $term->slug . '">';
 					echo $term->name;
 				echo '</a>';
 			echo '</h2>';
@@ -163,6 +163,28 @@ function jbr_customize_sorting() {
 add_action( 'init', 'jbr_customize_sorting' );
 
 /*
+ * Replaces sale string with discount percentage
+ */
+function jbr_show_discount( $text, $post, $product ) {
+	if ( $product->product_type == 'variable' ) {
+		$regular_price = $product->min_variation_price;
+		$sale_price = $product->min_variation_sale_price;
+	} else {
+		$regular_price = $product->regular_price;
+		$sale_price = $product->sale_price;
+	}
+	$percentage = round( ( ( $regular_price - $sale_price ) / $regular_price ) * 100 );
+	$text = $percentage . '%';
+	return '<span class="onsale">' . $text . '</span>';
+}
+add_filter( 'woocommerce_sale_flash', 'jbr_show_discount', 10, 3 );
+
+/**
+ * Trim zeros in price decimals
+ **/
+ add_filter( 'woocommerce_price_trim_zeros', '__return_true' );
+
+/*
  * Remove image from cart table
  */
 add_filter( 'woocommerce_cart_item_thumbnail', '__return_empty_string' );
@@ -174,23 +196,10 @@ function jbr_distraction_free_checkout() {
 	if ( class_exists( 'WooCommerce' ) ) {
 		if ( is_checkout() ) {
 			// Remove all actions
-			$hooks = array (
-				'storefront_header',
-				'storefront_footer',
-				'storefront_sidebar',
-				'storefront_before_content',
-			);
-			global $wp_filter;
-			foreach ( $hooks as $hook ) {
-				if ( has_action($hook) ) {
-					foreach ( $wp_filter[$hook]->callbacks as $priority => $actions ) {
-						foreach ( $actions as $action => $properties ) {
-							remove_action( $hook, $action, $priority );
-						}
-					}
-				}
-
-			}
+			remove_all_actions( 'storefront_header' );
+			remove_all_actions( 'storefront_footer' );
+			remove_all_actions( 'storefront_sidebar' );
+			remove_all_actions( 'storefront_before_content' );
 			// Remove selected actions
 			/*
 			remove_action( 'storefront_header', 'storefront_product_search', 30 );
@@ -210,3 +219,28 @@ function jbr_distraction_free_checkout() {
 	}
 }
 add_action( 'wp', 'jbr_distraction_free_checkout' );
+
+/*
+ * Adds custom footer links
+ */
+function jbr_custom_credit() {
+	?>
+	<div class="site-info">
+		<?php echo esc_html( apply_filters( 'storefront_copyright_text', $content = '&copy; ' . get_bloginfo( 'name' ) . ' ' . date( 'Y' ) ) ); ?>
+		<?php if ( apply_filters( 'storefront_credit_link', true ) ) { ?>
+		<br />
+			<?php
+			if ( apply_filters( 'storefront_privacy_policy_link', true ) && function_exists( 'the_privacy_policy_link' ) ) {
+				the_privacy_policy_link( '', '<span role="separator" aria-hidden="true"></span>' );
+			}
+			?>
+			<?php echo '<a href="' . get_the_permalink( '1587' ) .'" target="_blank" rel="nofollow">' . get_the_title( '1587' ) . '</a>.'; ?>
+		<?php } ?>
+	</div><!-- .site-info -->
+	<?php
+}
+function jbr_add_custom_credit() {
+	remove_action( 'storefront_footer', 'storefront_credit', 20 );
+	add_action( 'storefront_footer', 'jbr_custom_credit', 20 );
+}
+add_action( 'after_setup_theme', 'jbr_add_custom_credit' );
