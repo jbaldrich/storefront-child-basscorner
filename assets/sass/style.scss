@@ -16,9 +16,10 @@ $primary-font: Catamaran,HelveticaNeue-Light,"Helvetica Neue Light","Helvetica N
 $secondary-font: "Open Sans",HelveticaNeue-Light,"Helvetica Neue Light","Helvetica Neue",Helvetica,Arial,"Lucida Grande",sans-serif;
 $primary-color: #161616;
 $red-color: #EC1D24;
-$secondary-color: #333;
+$secondary-color: #ccc;
 $header-text-color: #fff;
 $header-text-link-color: #fff;
+$desktop: 768px;
 
 
 /* MIXINS */
@@ -99,7 +100,7 @@ body,button,input,textarea,select {
 
 }
 
-@media (min-width: 768px) {
+@media (min-width: $desktop) {
 	#masthead {
 
 		.col-full {
@@ -129,7 +130,7 @@ body,button,input,textarea,select {
 		}
 
 		.storefront-primary-navigation {
-			background-color: $secondary-color;
+			background-color: $red-color;
 
 			.main-navigation {
 				min-width: 90%;
@@ -153,7 +154,7 @@ body,button,input,textarea,select {
 				.cart-contents {
 					span.count {
 						border-radius: 15px;
-						background: $red-color;
+						background: $primary-color;
 						opacity: 1;
 						color: white;
 						height: 23px;
@@ -182,12 +183,179 @@ body,button,input,textarea,select {
 /* BREADCUMBS */
 
 .storefront-breadcrumb {
+	visibility: hidden;
+	padding: 0;
 	margin: 0;
 }
 
-@media (min-width: 768px) {
+@media (min-width: $desktop) {
 	.storefront-breadcrumb {
-		margin: 0;
+		visibility: visible;
+		padding: 1em 0;
 	}
 }
 
+/* CONTENT */
+.storefront-full-width-content.woocommerce-account .entry-header,
+.storefront-full-width-content.woocommerce-cart .entry-header,
+.storefront-full-width-content.woocommerce-checkout .entry-header,
+.storefront-full-width-content
+.woocommerce-products-header {
+	text-align: center;
+
+	h1 {
+		font-family: $primary-font;
+		font-weight: 700;
+		margin: 0;
+	}
+
+	img {
+		display: none;
+	}
+}
+
+.product-cats {
+	ul {
+		margin: 1em 0;
+		list-style: none;
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: space-around;
+
+		li {
+			h2 {
+				margin: 0;
+				font-size: 1em;
+			}
+		}
+	}
+}
+
+.storefront-sorting {
+	.woocommerce-ordering {
+		background-color: rgba(0,0,0,.025);
+		padding: .327em .6em;
+
+		.orderby {
+			border: none;
+			box-shadow: none;
+			background: transparent;
+			background-image: none;
+			-webkit-appearance: none;
+			width: 100%;
+			text-align-last: center;
+		}
+
+		&:hover {
+				background-color: rgba(0,0,0,.075);
+			}
+	}
+}
+
+.products {
+	.woocommerce-Price-amount {
+		font-size: 1.5rem;
+		font-weight: 700;
+	}
+
+	li {
+		border: 1px solid transparent;
+		border-radius: 5px;
+		padding-bottom: 1em;
+
+		&:hover {
+			border: 1px solid $primary-color;
+			-webkit-transition: border 300ms ease-out;
+			-moz-transition: border 300ms ease-out;
+			-o-transition: border 300ms ease-out;
+			transition: border 300ms ease-out;
+		}
+	}
+}
+
+.button {
+	background: none;
+	border: 1px solid $primary-color;
+	border-radius: 5px;
+	color: $primary-color;
+}
+
+@media (min-width: $desktop) {
+	.storefront-full-width-content.woocommerce-account .entry-header,
+	.storefront-full-width-content.woocommerce-checkout .entry-header,
+	.storefront-full-width-content.woocommerce-cart .entry-header,
+	.storefront-full-width-content
+	.woocommerce-products-header {
+		overflow: hidden;
+		padding: 0;
+		position: relative;
+		display: flex;
+		justify-content: space-around;
+		align-items: center;
+		background-color: $primary-color;
+
+		h1 {
+			color: $header-text-color;
+			font-size: 3em;
+			padding: 0.5em;
+			z-index: 1;
+		}
+
+		img {
+			display: block;
+			position: absolute;
+			-webkit-filter: brightness(70%);
+			-moz-filter: brightness(70%);
+			filter: brightness(70%);
+			opacity: 0.8;
+		}
+	}
+
+	.storefront-full-width-content.woocommerce-checkout .entry-header {
+		background-color: transparent;
+
+		h1 {
+			color: $primary-color;
+		}
+	}
+
+	.product-cats {
+		ul {
+
+			li {
+
+				h2 {
+					font-size: 1.5em;
+				}
+			}
+		}
+	}
+}
+
+/* CART */
+.woocommerce-cart-form
+.product-thumbnail {
+	display: none;
+}
+
+@media (min-width: $desktop) {
+	.cart-collaterals
+	.cart_totals {
+		float: none;
+		margin: auto;
+	}
+}
+
+/* CHECKOUT */
+@media (min-width: $desktop) {
+	.col2-set {
+		width: 100%;
+		float: none;
+		margin-right: 0;
+	}
+	#order_review,
+	#order_review_heading {
+		width: 100%;
+		float: none;
+	}
+}

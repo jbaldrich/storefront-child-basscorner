@@ -160,9 +160,53 @@ function jbr_customize_sorting() {
 	remove_action( 'woocommerce_after_shop_loop', 'storefront_sorting_wrapper_close', 31 );
 	remove_action( 'woocommerce_before_shop_loop', 'woocommerce_result_count', 20 );
 }
-add_action('init','jbr_customize_sorting');
+add_action( 'init', 'jbr_customize_sorting' );
 
 /*
  * Remove image from cart table
  */
 add_filter( 'woocommerce_cart_item_thumbnail', '__return_empty_string' );
+
+/**
+ * Create the distraction free checkout
+ */
+function jbr_distraction_free_checkout() {
+	if ( class_exists( 'WooCommerce' ) ) {
+		if ( is_checkout() ) {
+			// Remove all actions
+			$hooks = array (
+				'storefront_header',
+				'storefront_footer',
+				'storefront_sidebar',
+				'storefront_before_content',
+			);
+			global $wp_filter;
+			foreach ( $hooks as $hook ) {
+				if ( has_action($hook) ) {
+					foreach ( $wp_filter[$hook]->callbacks as $priority => $actions ) {
+						foreach ( $actions as $action => $properties ) {
+							remove_action( $hook, $action, $priority );
+						}
+					}
+				}
+
+			}
+			// Remove selected actions
+			/*
+			remove_action( 'storefront_header', 'storefront_product_search', 30 );
+			remove_action( 'storefront_header', 'storefront_secondary_navigation', 40 );
+			remove_action( 'storefront_header', 'storefront_primary_navigation_wrapper', 42 );
+			remove_action( 'storefront_header', 'storefront_primary_navigation', 50 );
+			remove_action( 'storefront_header', 'storefront_header_cart', 60 );
+			remove_action( 'storefront_header', 'storefront_primary_navigation_wrapper_close', 68 );
+			remove_action( 'storefront_footer', 'storefront_footer_widgets', 10 );
+			remove_action( 'storefront_footer', 'storefront_credit', 20 );
+			remove_action( 'storefront_sidebar','storefront_get_sidebar', 10 );
+			remove_action( 'storefront_before_content', 'woocommerce_breadcrumb', 10 );
+			remove_action( 'storefront_before_content', 'storefront_header_widget_region', 10 );
+			*/
+			remove_action( 'woocommerce_before_checkout_form', 'woocommerce_checkout_coupon_form', 10 );
+		}
+	}
+}
+add_action( 'wp', 'jbr_distraction_free_checkout' );
