@@ -247,8 +247,8 @@ body,button,input,textarea,select {
 		}
 
 		&:hover {
-				background-color: rgba(0,0,0,.075);
-			}
+			background-color: rgba(0,0,0,.075);
+		}
 	}
 }
 
@@ -348,16 +348,17 @@ body,button,input,textarea,select {
 	.products {
 
 		li {
-			border: 1px solid transparent;
+			//border: 1px solid transparent;
 			border-radius: 5px;
 			padding-bottom: 1em;
 
 			&:hover {
-				border: 1px solid $primary-color;
-				-webkit-transition: border 300ms ease-out;
-				-moz-transition: border 300ms ease-out;
-				-o-transition: border 300ms ease-out;
-				transition: border 300ms ease-out;
+				box-shadow: 0 0.5em 3.5em;
+				//border: 1px solid $primary-color;
+				-webkit-transition: box-shadow 300ms ease-out;
+				-moz-transition: box-shadow 300ms ease-out;
+				-o-transition: box-shadow 300ms ease-out;
+				transition: box-shadow 300ms ease-out;
 				ins {
 					color: $red-color;
 				}

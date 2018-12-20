@@ -276,16 +276,15 @@ body, button, input, textarea, select {
   }
 
   .products li {
-    border: 1px solid transparent;
     border-radius: 5px;
     padding-bottom: 1em;
   }
   .products li:hover {
-    border: 1px solid #161616;
-    -webkit-transition: border 300ms ease-out;
-    -moz-transition: border 300ms ease-out;
-    -o-transition: border 300ms ease-out;
-    transition: border 300ms ease-out;
+    box-shadow: 0 0.5em 3.5em;
+    -webkit-transition: box-shadow 300ms ease-out;
+    -moz-transition: box-shadow 300ms ease-out;
+    -o-transition: box-shadow 300ms ease-out;
+    transition: box-shadow 300ms ease-out;
   }
   .products li:hover ins {
     color: #EC1D24;
