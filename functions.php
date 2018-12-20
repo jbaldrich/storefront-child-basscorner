@@ -85,9 +85,11 @@ add_action( 'wp', 'jbr_load_layouts' );
  */
 function jbr_load_wc_layouts() {
 	if ( class_exists( 'WooCommerce' ) ) {
-		if ( is_product_category() || is_front_page() ) {
+		if ( is_product_category() || is_front_page() || is_shop() ) {
 			//require_once get_stylesheet_directory_uri() . '/inc/product-loop.php';
 			require_once  '/app/public/wp-content/themes/storefront-child-basscorner/inc/product-loop.php';
+			//require_once get_stylesheet_directory_uri() . '/inc/product.php';
+			require_once  '/app/public/wp-content/themes/storefront-child-basscorner/inc/product.php';
 		}
 		if ( is_product() ) {
 			//require_once get_stylesheet_directory_uri() . '/inc/product.php';

@@ -75,8 +75,9 @@ body,button,input,textarea,select {
 			}
 
 			input[type=search] {
+				color: $secondary-color;
 				border-width: 1px;
-				border-color: #9B9B9B;
+				border-color: $secondary-color;
 				border-style: solid;
 				@include border-radius(28px);
 				box-sizing: border-box;
@@ -135,9 +136,21 @@ body,button,input,textarea,select {
 			.main-navigation {
 				min-width: 90%;
 
+				.primary-navigation {
+					height: 100%;
+				}
+
 				.menu {
-					>li {
-						>a {
+					height: 100%;
+
+					.menu-item {
+						height: 100%;
+
+						&:hover {
+							background: $primary-color;
+						}
+
+						a {
 							padding: 0.8em 1em;
 						}
 					}
@@ -153,7 +166,7 @@ body,button,input,textarea,select {
 
 				.cart-contents {
 					span.count {
-						border-radius: 15px;
+						@include border-radius(15px);
 						background: $primary-color;
 						opacity: 1;
 						color: white;
@@ -223,6 +236,8 @@ body,button,input,textarea,select {
 		justify-content: space-around;
 
 		li {
+			margin-bottom: .5em;
+
 			h2 {
 				margin: 0;
 				font-size: 1em;
@@ -261,7 +276,7 @@ body,button,input,textarea,select {
 	height: 50px;
 	color: white;
 	background: $red-color;
-	border-radius: 50px;
+	@include border-radius(50px);
 	position: absolute;
 	border: none;
 	top: .5em;
@@ -269,7 +284,22 @@ body,button,input,textarea,select {
 	z-index: 99;
 }
 
-.products {
+li.product {
+	padding-bottom: 1em;
+	padding: 1em;
+	border: 1px solid $primary-color;
+	@include border-radius(5px);
+	margin-left: auto !important;
+	margin-right: auto;
+	display: table !important;
+
+	.woocommerce-loop-product__link {
+		height: 100%;
+	}
+
+	.woocommerce-loop-product__title {
+		font-weight: 700 !important;
+	}
 
 	.price {
 		del {
@@ -290,8 +320,15 @@ body,button,input,textarea,select {
 .button {
 	background: none;
 	border: 1px solid $primary-color;
-	border-radius: 5px;
+	@include border-radius(5px);
 	color: $primary-color;
+
+	&:hover {
+		-webkit-transition: background-color 300ms ease-out;
+		-moz-transition: background-color 300ms ease-out;
+		-o-transition: background-color 300ms ease-out;
+		transition: background-color 300ms ease-out;
+	}
 }
 
 @media (min-width: $desktop) {
@@ -339,40 +376,35 @@ body,button,input,textarea,select {
 			li {
 
 				h2 {
-					font-size: 1.5em;
+					font-size: 1.5rem;
 				}
 			}
 		}
 	}
 
-	.products {
+	li.product {
+		border: none;
 
-		li {
-			//border: 1px solid transparent;
-			border-radius: 5px;
-			padding-bottom: 1em;
-
-			&:hover {
-				box-shadow: 0 0.5em 3.5em;
-				//border: 1px solid $primary-color;
-				-webkit-transition: box-shadow 300ms ease-out;
-				-moz-transition: box-shadow 300ms ease-out;
-				-o-transition: box-shadow 300ms ease-out;
-				transition: box-shadow 300ms ease-out;
-				ins {
-					color: $red-color;
-				}
+		&:hover {
+			box-shadow: 0 0.5em 3.5em;
+			//border: 1px solid $primary-color;
+			-webkit-transition: box-shadow 300ms ease-out;
+			-moz-transition: box-shadow 300ms ease-out;
+			-o-transition: box-shadow 300ms ease-out;
+			transition: box-shadow 300ms ease-out;
+			ins {
+				color: $red-color;
 			}
+		}
 
-			&:not(:hover) span,
-			&:not(:hover) h2,
-			&:not(:hover) .button {
-				opacity: .8;
-				-webkit-transition: opacity 300ms ease-out;
-				-moz-transition: opacity 300ms ease-out;
-				-o-transition: opacity 300ms ease-out;
-				transition: opacity 300ms ease-out;
-			}
+		&:not(:hover) .price,
+		&:not(:hover) .woocommerce-loop-product__title,
+		&:not(:hover) .button {
+			opacity: .8;
+			-webkit-transition: opacity 300ms ease-out;
+			-moz-transition: opacity 300ms ease-out;
+			-o-transition: opacity 300ms ease-out;
+			transition: opacity 300ms ease-out;
 		}
 	}
 }

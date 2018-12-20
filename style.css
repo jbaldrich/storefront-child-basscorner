@@ -54,8 +54,9 @@ body, button, input, textarea, select {
   left: 0.5em;
 }
 #masthead .site-search .widget_product_search input[type=search] {
+  color: #ccc;
   border-width: 1px;
-  border-color: #9B9B9B;
+  border-color: #ccc;
   border-style: solid;
   -moz-border-radius: 28px;
   -webkit-border-radius: 28px;
@@ -100,7 +101,19 @@ body, button, input, textarea, select {
   #masthead .storefront-primary-navigation .main-navigation {
     min-width: 90%;
   }
-  #masthead .storefront-primary-navigation .main-navigation .menu > li > a {
+  #masthead .storefront-primary-navigation .main-navigation .primary-navigation {
+    height: 100%;
+  }
+  #masthead .storefront-primary-navigation .main-navigation .menu {
+    height: 100%;
+  }
+  #masthead .storefront-primary-navigation .main-navigation .menu .menu-item {
+    height: 100%;
+  }
+  #masthead .storefront-primary-navigation .main-navigation .menu .menu-item:hover {
+    background: #161616;
+  }
+  #masthead .storefront-primary-navigation .main-navigation .menu .menu-item a {
     padding: 0.8em 1em;
   }
   #masthead .storefront-primary-navigation .site-header-cart {
@@ -110,6 +123,8 @@ body, button, input, textarea, select {
     display: none;
   }
   #masthead .storefront-primary-navigation .site-header-cart .cart-contents span.count {
+    -moz-border-radius: 15px;
+    -webkit-border-radius: 15px;
     border-radius: 15px;
     background: #161616;
     opacity: 1;
@@ -173,6 +188,9 @@ body, button, input, textarea, select {
   flex-wrap: wrap;
   justify-content: space-around;
 }
+.product-cats ul li {
+  margin-bottom: 0.5em;
+}
 .product-cats ul li h2 {
   margin: 0;
   font-size: 1em;
@@ -204,6 +222,8 @@ body, button, input, textarea, select {
   height: 50px;
   color: white;
   background: #EC1D24;
+  -moz-border-radius: 50px;
+  -webkit-border-radius: 50px;
   border-radius: 50px;
   position: absolute;
   border: none;
@@ -212,22 +232,47 @@ body, button, input, textarea, select {
   z-index: 99;
 }
 
-.products .price del {
+li.product {
+  padding-bottom: 1em;
+  padding: 1em;
+  border: 1px solid #161616;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+  margin-left: auto !important;
+  margin-right: auto;
+  display: table !important;
+}
+li.product .woocommerce-loop-product__link {
+  height: 100%;
+}
+li.product .woocommerce-loop-product__title {
+  font-weight: 700 !important;
+}
+li.product .price del {
   display: none;
 }
-.products .price .woocommerce-Price-amount {
+li.product .price .woocommerce-Price-amount {
   font-size: 1.5rem;
   font-weight: 700;
 }
-.products .added_to_cart {
+li.product .added_to_cart {
   display: none;
 }
 
 .button {
   background: none;
   border: 1px solid #161616;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
   border-radius: 5px;
   color: #161616;
+}
+.button:hover {
+  -webkit-transition: background-color 300ms ease-out;
+  -moz-transition: background-color 300ms ease-out;
+  -o-transition: background-color 300ms ease-out;
+  transition: background-color 300ms ease-out;
 }
 
 @media (min-width: 768px) {
@@ -272,24 +317,23 @@ body, button, input, textarea, select {
   }
 
   .product-cats ul li h2 {
-    font-size: 1.5em;
+    font-size: 1.5rem;
   }
 
-  .products li {
-    border-radius: 5px;
-    padding-bottom: 1em;
+  li.product {
+    border: none;
   }
-  .products li:hover {
+  li.product:hover {
     box-shadow: 0 0.5em 3.5em;
     -webkit-transition: box-shadow 300ms ease-out;
     -moz-transition: box-shadow 300ms ease-out;
     -o-transition: box-shadow 300ms ease-out;
     transition: box-shadow 300ms ease-out;
   }
-  .products li:hover ins {
+  li.product:hover ins {
     color: #EC1D24;
   }
-  .products li:not(:hover) span, .products li:not(:hover) h2, .products li:not(:hover) .button {
+  li.product:not(:hover) .price, li.product:not(:hover) .woocommerce-loop-product__title, li.product:not(:hover) .button {
     opacity: 0.8;
     -webkit-transition: opacity 300ms ease-out;
     -moz-transition: opacity 300ms ease-out;
