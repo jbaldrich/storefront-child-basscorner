@@ -17,12 +17,10 @@ function jbr_add_category_image() {
 add_action( 'woocommerce_archive_description', 'jbr_add_category_image', 5 );
 
 /*
- * Move category and product descriptions to the bottom
+ * Move category descriptions to the bottom
  */
 remove_action( 'woocommerce_archive_description', 'woocommerce_taxonomy_archive_description', 10 );
-//remove_action( 'woocommerce_archive_description', 'woocommerce_product_archive_description', 10 );
 add_action( 'woocommerce_after_shop_loop', 'woocommerce_taxonomy_archive_description', 40 );
-//add_action( 'woocommerce_after_shop_loop', 'woocommerce_product_archive_description', 40 );
 
 /*
  * Show categories out of the loop
@@ -68,9 +66,9 @@ remove_action( 'woocommerce_after_shop_loop', 'woocommerce_result_count', 20 );
 remove_action( 'woocommerce_after_shop_loop', 'woocommerce_pagination', 30 );
 remove_action( 'woocommerce_after_shop_loop', 'storefront_sorting_wrapper_close', 31 );
 
+/*
+ * Remove Add to Cart Button
+ */
+remove_action( 'woocommerce_after_shop_loop_item', 'woocommerce_template_loop_add_to_cart', 10 );
 
 
- /*
-  * Remove Add to Cart Button
-  */
- remove_action( 'woocommerce_after_shop_loop_item', 'woocommerce_template_loop_add_to_cart', 10 );

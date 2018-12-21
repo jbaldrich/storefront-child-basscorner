@@ -66,44 +66,46 @@ if ( ! function_exists( 'storefront_cart_link' ) ) {
 }
 
 /**
- * Conditionally load layout functions 
+ * Conditionally load include functions 
  */
-function jbr_load_layouts() {
+function jbr_load_includes() {
 	if ( class_exists( 'WooCommerce' ) ) {
 		if ( ! is_checkout() && ! wp_doing_ajax() ) {
-			//require_once get_stylesheet_directory_uri() . '/inc/header.php';
-			require_once  '/app/public/wp-content/themes/storefront-child-basscorner/inc/header.php';
-			//require_once get_stylesheet_directory_uri() . '/inc/footer.php';
-			require_once  '/app/public/wp-content/themes/storefront-child-basscorner/inc/footer.php';
+			require_once get_stylesheet_directory() . '/inc/header.php';
+			require_once get_stylesheet_directory() . '/inc/footer.php';
 		}
-	}
-}
-add_action( 'wp', 'jbr_load_layouts' );
-
-/**
- * Conditionally load WooCommerce layout functions 
- */
-function jbr_load_wc_layouts() {
-	if ( class_exists( 'WooCommerce' ) ) {
-		if ( is_product_category() || is_front_page() || is_shop() ) {
-			//require_once get_stylesheet_directory_uri() . '/inc/product-loop.php';
-			require_once  '/app/public/wp-content/themes/storefront-child-basscorner/inc/product-loop.php';
-			//require_once get_stylesheet_directory_uri() . '/inc/product.php';
-			require_once  '/app/public/wp-content/themes/storefront-child-basscorner/inc/product.php';
+		if ( is_product_category() || is_front_page() || is_shop() || is_404() ) {
+			require_once get_stylesheet_directory() . '/inc/product-loop.php';
+			require_once get_stylesheet_directory() . '/inc/product.php';
 		}
 		if ( is_product() ) {
-			//require_once get_stylesheet_directory_uri() . '/inc/product.php';
-			require_once  '/app/public/wp-content/themes/storefront-child-basscorner/inc/product.php';
+			require_once get_stylesheet_directory() . '/inc/product.php';
 		}
 		if ( is_cart() ) {
-			//require_once get_stylesheet_directory_uri() . '/inc/cart.php';
-			require_once  '/app/public/wp-content/themes/storefront-child-basscorner/inc/cart.php';
+			require_once get_stylesheet_directory() . '/inc/cart.php';
 		}
 		if ( is_checkout() ) {
-			//require_once get_stylesheet_directory_uri() . '/inc/checkout.php';
-			require_once  '/app/public/wp-content/themes/storefront-child-basscorner/inc/checkout.php';
+			require_once get_stylesheet_directory() . '/inc/checkout.php';
 		}
 	}
 }
-add_action( 'wp', 'jbr_load_wc_layouts' );
+add_action( 'wp', 'jbr_load_includes' );
 
+/**
+ * Show all products
+ */
+function jbr_all_products_query( $q ){
+	$q->set( 'posts_per_page', -1 );
+}
+add_action( 'woocommerce_product_query', 'jbr_all_products_query' );
+
+/**
+ * Add WCPOS plugin compatibility with Multisite
+ */
+function wc_pos_map_meta_cap( $caps, $cap, $user_id ) {
+	if ( $cap == 'edit_users' && $user_id === 4 ) {
+		$caps = array( 'edit_users' );
+	}
+	return $caps;
+}
+add_filter( 'map_meta_cap', 'wc_pos_map_meta_cap', 10, 3 );

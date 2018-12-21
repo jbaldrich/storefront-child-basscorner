@@ -169,7 +169,6 @@ body,button,input,textarea,select {
 						@include border-radius(15px);
 						background: $primary-color;
 						opacity: 1;
-						color: white;
 						height: 23px;
 						width: 23px;
 						position: absolute;
@@ -284,6 +283,93 @@ body,button,input,textarea,select {
 	z-index: 99;
 }
 
+.slide-message {
+	margin: 1em;
+	margin-top: -1em;
+}
+
+.available-on-backorder {
+	color: $red-color;
+}
+
+.stock {
+	&.in-stock {
+		&:before {
+			content: "\f14a";
+		}
+	}
+
+	&.out-of-stock {
+		&:before {
+			content: "\f071";
+		}
+	}
+}
+
+.price {
+	color: $primary-color;
+	font-size: 2em;
+	margin: 0.2em 0;
+	font-weight: bold;
+
+	del {
+		display: none;
+	}
+
+	.woocommerce-Price-amount {
+		font-weight: 700;
+	}
+}
+
+.single-product
+div.product {
+	text-align: center;
+	max-width: 416px;
+	margin: auto;
+	
+	.product_title {
+		font-family: $primary-font;
+		font-size: 2em;
+		font-weight: bold;
+		letter-spacing: 0px;
+		margin-bottom: 0.2em;
+	}
+	.woocommerce-product-gallery
+	.woocommerce-product-gallery__trigger {
+		border-radius: 2.5em;
+		height: 2.5em;
+		width: 2.5em;
+
+		&:before {
+			line-height: 2.5em;
+		}
+	}
+
+	p.price {
+		font-size: 2em;
+		margin: 0.2em 0;
+	}
+
+	form.cart {
+		display: flex;
+		flex-direction: column;
+
+		.quantity {
+			margin-bottom: 1em;
+			margin-right: 0;
+		}
+	}
+
+	.description_tab {
+		font-weight: bold;
+		color: $primary-color;
+	}
+}
+
+.flex-control-thumbs {
+	display: none;
+}
+
 li.product {
 	padding-bottom: 1em;
 	padding: 1em;
@@ -302,13 +388,8 @@ li.product {
 	}
 
 	.price {
-		del {
-			display: none;
-		}
-
 		.woocommerce-Price-amount {
 			font-size: 1.5rem;
-			font-weight: 700;
 		}
 	}
 
@@ -376,8 +457,30 @@ li.product {
 			li {
 
 				h2 {
-					font-size: 1.5rem;
+					font-size: 1.5em;
 				}
+			}
+		}
+	}
+
+	.slide-message {
+		display: none;
+	}
+
+	.flex-control-thumbs {
+		display: block;
+	}
+
+	.single-product
+	div.product {
+		text-align: left;
+		max-width: none;
+
+		form.cart {
+			display: block;
+
+			.quantity {
+				margin-right: .875em;
 			}
 		}
 	}
@@ -424,6 +527,16 @@ li.product {
 }
 
 /* CHECKOUT */
+table.woocommerce-checkout-review-order-table {
+	.product-name {
+		width: auto;
+	}
+
+	.product-total {
+		text-align: right;
+	}
+}
+
 @media (min-width: $desktop) {
 	.col2-set {
 		width: 100%;
