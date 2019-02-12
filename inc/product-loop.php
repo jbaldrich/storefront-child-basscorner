@@ -71,4 +71,25 @@ remove_action( 'woocommerce_after_shop_loop', 'storefront_sorting_wrapper_close'
  */
 remove_action( 'woocommerce_after_shop_loop_item', 'woocommerce_template_loop_add_to_cart', 10 );
 
+/*
+ * Change the WooCommerce loop query to show all products and hide POS Only products
+ */
+function all_products_query( $q ){
+	$q->set( 'posts_per_page', -1 );
+	$q->set( 'meta_query' , array(
+		'relation' => 'OR',
+		array(
+			'key'     => '_pos_visibility',
+			'value'   => 'pos_only',
+			'compare' => '!=',
+		),
+		array(
+			'key'     => '_pos_visibility',
+			'value'   => 'pos_only',
+			'compare' => 'NOT EXISTS',
+		),
+	) );
+}
+add_action( 'woocommerce_product_query', 'all_products_query' );
+
 

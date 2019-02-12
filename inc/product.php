@@ -6,16 +6,42 @@ if ( !defined( 'ABSPATH' ) ) exit;
  * Replaces sale string with discount percentage
  */
 function jbr_show_discount( $text, $post, $product ) {
-	if ( $product->product_type == 'variable' ) {
-		$regular_price = $product->min_variation_price;
-		$sale_price = $product->min_variation_sale_price;
+
+	if ( $product->product_type === 'variable' ) {
+
+		$variation_prices = $product->get_variation_prices();
+
+		$regular_prices = $variation_prices['regular_price'];
+		$current_prices = $variation_prices['price'];
+
+		$difference = array_diff_assoc( $current_prices, $regular_prices );
+
+		$best_deal = 0;
+
+		foreach ( $regular_prices as $id => $value ) {
+
+			if ( $difference[$id] && $best_deal < $value / $difference[$id] ) {
+
+				$best_deal = $value / $difference[$id];
+				$regular_price = $value;
+				$sale_price = $current_prices[$id];
+
+			}
+
+		}
+		
 	} else {
+
 		$regular_price = $product->regular_price;
 		$sale_price = $product->sale_price;
+
 	}
+
 	$percentage = round( ( ( $regular_price - $sale_price ) / $regular_price ) * 100 );
 	$text = $percentage . '%';
+
 	return '<span class="onsale">' . $text . '</span>';
+
 }
 add_filter( 'woocommerce_sale_flash', 'jbr_show_discount', 10, 3 );
 
