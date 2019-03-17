@@ -1,0 +1,303 @@
+.storefront-full-width-content.woocommerce-account .entry-header,
+.storefront-full-width-content.woocommerce-cart .entry-header,
+.storefront-full-width-content.woocommerce-checkout .entry-header,
+.storefront-full-width-content
+.woocommerce-products-header {
+	text-align: center;
+
+	h1 {
+		font-family: $primary-font;
+		font-weight: 700;
+		margin: 0;
+	}
+
+	img {
+		display: none;
+	}
+}
+
+.product-cats {
+	ul {
+		margin: 1em 0;
+		list-style: none;
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: space-around;
+
+		li {
+			margin-bottom: .5em;
+
+			h2 {
+				margin: 0;
+				font-size: 1em;
+			}
+		}
+	}
+}
+
+.storefront-sorting {
+	.woocommerce-ordering {
+		background-color: rgba(0,0,0,.025);
+		padding: .327em .6em;
+
+		.orderby {
+			border: none;
+			box-shadow: none;
+			background: transparent;
+			background-image: none;
+			-webkit-appearance: none;
+			width: 100%;
+			text-align-last: center;
+		}
+
+		&:hover {
+			background-color: rgba(0,0,0,.075);
+		}
+	}
+}
+
+.onsale {
+	text-align: center;
+	font-size: 1rem;
+	line-height: 3rem;
+	padding: 0;
+	width: 50px;
+	height: 50px;
+	color: white;
+	background: $red-color;
+	@include border-radius(50px);
+	position: absolute;
+	border: none;
+	top: .5em;
+	left: .5em;
+	z-index: 99;
+}
+
+.slide-message {
+	margin: 1em;
+	margin-top: -1em;
+}
+
+.available-on-backorder {
+	color: $red-color;
+}
+
+.stock {
+	&.in-stock {
+		&:before {
+			content: "\f14a";
+		}
+	}
+
+	&.out-of-stock {
+		&:before {
+			content: "\f071";
+		}
+	}
+}
+
+.price {
+	color: $primary-color;
+	font-size: 2em;
+	margin: 0.2em 0;
+	font-weight: bold;
+
+	del {
+		display: none;
+	}
+
+	.woocommerce-Price-amount {
+		font-weight: 700;
+	}
+}
+
+.single-product
+div.product {
+	text-align: center;
+	max-width: 416px;
+	margin: auto;
+	
+	.product_title {
+		font-family: $primary-font;
+		font-size: 2em;
+		font-weight: bold;
+		letter-spacing: 0px;
+		margin-bottom: 0.2em;
+	}
+	.woocommerce-product-gallery
+	.woocommerce-product-gallery__trigger {
+		border-radius: 2.5em;
+		height: 2.5em;
+		width: 2.5em;
+
+		&:before {
+			line-height: 2.5em;
+		}
+	}
+
+	p.price {
+		font-size: 2em;
+		margin: 0.2em 0;
+	}
+
+	form.cart {
+		display: flex;
+		flex-direction: column;
+
+		.quantity {
+			margin-bottom: 1em;
+			margin-right: 0;
+		}
+	}
+
+	.description_tab {
+		font-weight: bold;
+		color: $primary-color;
+	}
+}
+
+.flex-control-thumbs {
+	display: none;
+}
+
+li.product {
+	padding-bottom: 1em;
+	padding: 1em;
+	border: 1px solid $primary-color;
+	@include border-radius(5px);
+	margin-left: auto !important;
+	margin-right: auto;
+	display: table !important;
+
+	.woocommerce-loop-product__link {
+		height: 100%;
+	}
+
+	.woocommerce-loop-product__title {
+		font-weight: 700 !important;
+	}
+
+	.price {
+		.woocommerce-Price-amount {
+			font-size: 1.5rem;
+		}
+	}
+
+	.added_to_cart {
+		display: none;
+	}
+}
+
+.button {
+	background: none;
+	border: 1px solid $primary-color;
+	@include border-radius(5px);
+	color: $primary-color;
+
+	&:hover {
+		-webkit-transition: background-color 300ms ease-out;
+		-moz-transition: background-color 300ms ease-out;
+		-o-transition: background-color 300ms ease-out;
+		transition: background-color 300ms ease-out;
+	}
+}
+
+@media (min-width: $desktop) {
+	.storefront-full-width-content.woocommerce-account .entry-header,
+	.storefront-full-width-content.woocommerce-checkout .entry-header,
+	.storefront-full-width-content.woocommerce-cart .entry-header,
+	.storefront-full-width-content
+	.woocommerce-products-header {
+		overflow: hidden;
+		padding: 0;
+		position: relative;
+		display: flex;
+		justify-content: space-around;
+		align-items: center;
+		background-color: $primary-color;
+
+		h1 {
+			color: $header-text-color;
+			font-size: 3em;
+			padding: 0.5em;
+			z-index: 1;
+		}
+
+		img {
+			display: block;
+			position: absolute;
+			-webkit-filter: brightness(70%);
+			-moz-filter: brightness(70%);
+			filter: brightness(70%);
+			opacity: 0.8;
+		}
+	}
+
+	.storefront-full-width-content.woocommerce-checkout .entry-header {
+		background-color: transparent;
+
+		h1 {
+			color: $primary-color;
+		}
+	}
+
+	.product-cats {
+		ul {
+
+			li {
+
+				h2 {
+					font-size: 1.5em;
+				}
+			}
+		}
+	}
+
+	.slide-message {
+		display: none;
+	}
+
+	.flex-control-thumbs {
+		display: block;
+	}
+
+	.single-product
+	div.product {
+		text-align: left;
+		max-width: none;
+
+		form.cart {
+			display: block;
+
+			.quantity {
+				margin-right: .875em;
+			}
+		}
+	}
+
+	li.product {
+		border: none;
+
+		&:hover {
+			box-shadow: 0 0.5em 3.5em;
+			//border: 1px solid $primary-color;
+			-webkit-transition: box-shadow 300ms ease-out;
+			-moz-transition: box-shadow 300ms ease-out;
+			-o-transition: box-shadow 300ms ease-out;
+			transition: box-shadow 300ms ease-out;
+			ins {
+				color: $red-color;
+			}
+		}
+
+		&:not(:hover) .price,
+		&:not(:hover) .woocommerce-loop-product__title,
+		&:not(:hover) .button {
+			opacity: .8;
+			-webkit-transition: opacity 300ms ease-out;
+			-moz-transition: opacity 300ms ease-out;
+			-o-transition: opacity 300ms ease-out;
+			transition: opacity 300ms ease-out;
+		}
+	}
+}

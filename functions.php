@@ -1,6 +1,14 @@
 <?php
-// Exit if accessed directly
-if ( !defined( 'ABSPATH' ) ) exit;
+/**
+ * The functions file for the Storefront Child BassCorner Theme
+ *
+ * @package storefront-child-basscorner
+ */
+
+/** Exit if accessed directly */
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 /**
  * Dequeue the Storefront Parent theme core CSS
@@ -10,23 +18,6 @@ function jbr_child_theme_dequeue_style() {
 	wp_dequeue_style( 'storefront-woocommerce-style' );
 }
 //add_action( 'wp_enqueue_scripts', 'jbr_child_theme_dequeue_style', 999 );
-
-/*********************************************************************************************************/
-/**
- * Enqueue Fonts on WordPress
- */
-function jbr_enqueue_fonts() {
-	$fonts = array(
-		'Catamaran' => 'https://fonts.googleapis.com/css?family=Catamaran:700,900',
-	);
-	foreach ($fonts as $font => $src) {
-		wp_register_style( $font, $src, array(), null );
-		wp_enqueue_style( $font, $src, array(), null );
-	}
-	
-}
-//add_action( 'wp_enqueue_scripts', 'jbr_enqueue_fonts' );
-/*********************************************************************************************************/
 
 /**
  * Enqueue Google Fonts on Storefront (put $fonts asa a parameter to add, remove paramater to rewrite)
@@ -66,7 +57,7 @@ if ( ! function_exists( 'storefront_cart_link' ) ) {
 }
 
 /**
- * Conditionally load include functions 
+ * Conditionally load include functions
  */
 function jbr_load_includes() {
 	if ( class_exists( 'WooCommerce' ) ) {
@@ -94,7 +85,7 @@ add_action( 'wp', 'jbr_load_includes' );
 /**
  * Show all products
  */
-function jbr_all_products_query( $q ){
+function jbr_all_products_query( $q ) {
 	$q->set( 'posts_per_page', -1 );
 }
 add_action( 'woocommerce_product_query', 'jbr_all_products_query' );

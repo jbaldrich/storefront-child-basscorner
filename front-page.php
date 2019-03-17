@@ -1,7 +1,14 @@
 <?php
 /**
  * The template for displaying the home page.
+ *
+ * @package storefront-child-basscorner
  */
+
+/** Exit if accessed directly */
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 get_header(); ?>
 

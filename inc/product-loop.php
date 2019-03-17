@@ -1,17 +1,19 @@
 <?php
-// Exit if accessed directly
-if ( !defined( 'ABSPATH' ) ) exit;
+/** Exit if accessed directly */
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 /**
  * Add product category image
  */
 function jbr_add_category_image() {
 	global $wp_query;
-	$category = $wp_query->get_queried_object();
+	$category     = $wp_query->get_queried_object();
 	$thumbnail_id = get_woocommerce_term_meta( $category->term_id, 'thumbnail_id', true );
-	$image = wp_get_attachment_url( $thumbnail_id );
+	$image        = wp_get_attachment_url( $thumbnail_id );
 	if ( $image ) {
-		echo '<img src="' . $image . '" alt="' . $category->name . '" />';
+		echo '<img src="' . esc_attr( $image ) . '" alt="' . esc_attr( $category->name ) . '" />';
 	}
 }
 add_action( 'woocommerce_archive_description', 'jbr_add_category_image', 5 );
@@ -22,39 +24,39 @@ add_action( 'woocommerce_archive_description', 'jbr_add_category_image', 5 );
 remove_action( 'woocommerce_archive_description', 'woocommerce_taxonomy_archive_description', 10 );
 add_action( 'woocommerce_after_shop_loop', 'woocommerce_taxonomy_archive_description', 40 );
 
-/*
+/**
  * Show categories out of the loop
  */
 function jbr_show_product_subcategories( $args = array() ) {
 	$parentid = get_queried_object_id();
-	$args = array( 'parent' => $parentid );
-	$terms = get_terms( 'product_cat', $args );
+	$args     = array( 'parent' => $parentid );
+	$terms    = get_terms( 'product_cat', $args );
 	if ( $terms ) {
 		echo '<nav class="product-cats"><ul>';
 		foreach ( $terms as $term ) {
-		echo '<li class="category">';
-			echo '<h2>';
-				echo '<a href="' . esc_url( get_term_link( $term ) ) . '" class="button ' . $term->slug . '">';
-					echo $term->name;
-				echo '</a>';
-			echo '</h2>';
-		echo '</li>';
+			echo '<li class="category">';
+				echo '<h2>';
+					echo '<a href="' . esc_url( get_term_link( $term ) ) . '" class="button ' . esc_attr( $term->slug ) . '">';
+						echo esc_html( $term->name );
+					echo '</a>';
+				echo '</h2>';
+			echo '</li>';
 		}
-	echo '</ul></nav>';
+		echo '</ul></nav>';
 	}
 }
 add_action( 'woocommerce_before_shop_loop', 'jbr_show_product_subcategories', 5 );
 
-/*
+/**
  * Remove unwanted sorting options
  */
-function jbr_remove_sorting_options ( $orderby ) {
+function jbr_remove_sorting_options( $orderby ) {
 	unset( $orderby['popularity'] );
 	unset( $orderby['rating'] );
 	unset( $orderby['date'] );
 	return $orderby;
 }
-add_filter ( 'woocommerce_catalog_orderby', 'jbr_remove_sorting_options', 20 );
+add_filter( 'woocommerce_catalog_orderby', 'jbr_remove_sorting_options', 20 );
 
 /*
  * Remove result count from before the loop and all sorting and paging from after the loop
@@ -71,24 +73,27 @@ remove_action( 'woocommerce_after_shop_loop', 'storefront_sorting_wrapper_close'
  */
 remove_action( 'woocommerce_after_shop_loop_item', 'woocommerce_template_loop_add_to_cart', 10 );
 
-/*
+/**
  * Change the WooCommerce loop query to show all products and hide POS Only products
  */
-function all_products_query( $q ){
+function all_products_query( $q ) {
 	$q->set( 'posts_per_page', -1 );
-	$q->set( 'meta_query' , array(
-		'relation' => 'OR',
+	$q->set(
+		'meta_query',
 		array(
-			'key'     => '_pos_visibility',
-			'value'   => 'pos_only',
-			'compare' => '!=',
-		),
-		array(
-			'key'     => '_pos_visibility',
-			'value'   => 'pos_only',
-			'compare' => 'NOT EXISTS',
-		),
-	) );
+			'relation' => 'OR',
+			array(
+				'key'     => '_pos_visibility',
+				'value'   => 'pos_only',
+				'compare' => '!=',
+			),
+			array(
+				'key'     => '_pos_visibility',
+				'value'   => 'pos_only',
+				'compare' => 'NOT EXISTS',
+			),
+		)
+	);
 }
 add_action( 'woocommerce_product_query', 'all_products_query' );
 

@@ -1,0 +1,12 @@
+.woocommerce-cart-form
+.product-thumbnail {
+	display: none;
+}
+
+@media (min-width: $desktop) {
+	.cart-collaterals
+	.cart_totals {
+		float: none;
+		margin: auto;
+	}
+}

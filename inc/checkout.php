@@ -1,6 +1,8 @@
 <?php
-// Exit if accessed directly
-if ( !defined( 'ABSPATH' ) ) exit;
+/** Exit if accessed directly */
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 /**
  * Create the distraction free checkout
@@ -10,7 +12,7 @@ remove_all_actions( 'storefront_footer' );
 remove_all_actions( 'storefront_sidebar' );
 remove_all_actions( 'storefront_before_content' );
 remove_action( 'woocommerce_before_checkout_form', 'woocommerce_checkout_coupon_form', 10 );
-// Remove selected actions
+// Remove selected actions.
 /*
 remove_action( 'storefront_header', 'storefront_product_search', 30 );
 remove_action( 'storefront_header', 'storefront_secondary_navigation', 40 );

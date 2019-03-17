@@ -1,13 +1,15 @@
 <?php
-// Exit if accessed directly
-if ( !defined( 'ABSPATH' ) ) exit;
+/** Exit if accessed directly */
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
-/*
+/**
  * Replaces sale string with discount percentage
  */
 function jbr_show_discount( $text, $post, $product ) {
 
-	if ( $product->product_type === 'variable' ) {
+	if ( 'variable' === $product->product_type ) {
 
 		$variation_prices = $product->get_variation_prices();
 
@@ -20,25 +22,25 @@ function jbr_show_discount( $text, $post, $product ) {
 
 		foreach ( $regular_prices as $id => $value ) {
 
-			if ( $difference[$id] && $best_deal < $value / $difference[$id] ) {
+			if ( $difference[ $id ] && $best_deal < $value / $difference[ $id ] ) {
 
-				$best_deal = $value / $difference[$id];
+				$best_deal     = $value / $difference[ $id ];
 				$regular_price = $value;
-				$sale_price = $current_prices[$id];
+				$sale_price    = $current_prices[ $id ];
 
 			}
 
 		}
-		
+
 	} else {
 
 		$regular_price = $product->regular_price;
-		$sale_price = $product->sale_price;
+		$sale_price    = $product->sale_price;
 
 	}
 
 	$percentage = round( ( ( $regular_price - $sale_price ) / $regular_price ) * 100 );
-	$text = $percentage . '%';
+	$text       = $percentage . '%';
 
 	return '<span class="onsale">' . $text . '</span>';
 
@@ -47,12 +49,12 @@ add_filter( 'woocommerce_sale_flash', 'jbr_show_discount', 10, 3 );
 
 /**
  * Trim zeros in price decimals
- **/
- add_filter( 'woocommerce_price_trim_zeros', '__return_true' );
+ */
+add_filter( 'woocommerce_price_trim_zeros', '__return_true' );
 
 /**
  * Remove related products
- **/
+ */
 remove_action( 'woocommerce_after_single_product_summary', 'woocommerce_output_related_products', 20 );
 
 
@@ -62,9 +64,9 @@ remove_action( 'woocommerce_after_single_product_summary', 'woocommerce_output_r
 function jbr_add_text_above_wc_product_thumbs() {
 	global $product;
 	$attachment_ids = $product->get_gallery_attachment_ids();
-	if ( ! empty($attachment_ids ) ) {
+	if ( ! empty( $attachment_ids ) ) {
 		echo '<div class="slide-message"><span>';
-		_e( 'Slide your finger to show more images', 'storefront' );
+		esc_html_e( 'Slide your finger to show more images', 'storefront-child-basscorner' );
 		echo '</span></div>';
 	}
 }
@@ -72,5 +74,5 @@ add_action( 'woocommerce_before_single_product_summary', 'jbr_add_text_above_wc_
 
 /**
  * Remove product description heading
- **/
+ */
 add_filter( 'woocommerce_product_description_heading', '__return_null' );

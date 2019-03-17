@@ -10,6 +10,20 @@ This is a custom Sorefront Child Theme made for Tanne Bass Corner
 2. Click Upload Theme and Choose File, then select the theme's .zip file. Click Install Now.
 3. Click Activate to use your new theme right away.
 
+## SASS
+
+To use SASS first install it from the console
+
+```npm install -g sass```
+
+Then set SASS to watch for file changes to compile
+
+```sass --watch /assets/sass/style.scss style.css```
+
+Add the sass folder to watch for changes
+
+```sass --watch assets/sass:```
+
 ## Usage
 
 This child theme is designed to be used as a starter theme for the WooCommerce StoreFront theme which you can download for free below.

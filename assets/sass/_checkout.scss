@@ -1,0 +1,22 @@
+table.woocommerce-checkout-review-order-table {
+	.product-name {
+		width: auto;
+	}
+
+	.product-total {
+		text-align: right;
+	}
+}
+
+@media (min-width: $desktop) {
+	.col2-set {
+		width: 100%;
+		float: none;
+		margin-right: 0;
+	}
+	#order_review,
+	#order_review_heading {
+		width: 100%;
+		float: none;
+	}
+}
